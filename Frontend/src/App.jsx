@@ -47,35 +47,67 @@ function App() {
     };
 
     return (
-        <div className="container">
-            <div className="card">
-                <h1>🩻 X-Ray AI Analiz</h1>
-                <p>Lütfen analiz edilecek röntgen görüntüsünü yükleyin.</p>
-
-                <div className="upload-area">
-                    <input type="file" accept="image/*" onChange={handleFileChange} id="fileInput" />
-                    <label htmlFor="fileInput" className="file-label">
-                        {file ? file.name : "Dosya Seç veya Sürükle"}
-                    </label>
+        <div className="app-container">
+            {/* Sol Panel: Kontroller */}
+            <div className="sidebar">
+                <div className="brand-header">
+                    <h1 className="brand-title">Xray Görüntü Analizi<br />Berkay Özer, Enes Kulpu</h1>
                 </div>
 
-                {preview && (
-                    <div className="preview-box">
-                        <img src={preview} alt="Önizleme" className="preview-img" />
+                <div className="upload-section">
+                    <p className="instructions">Analiz için bir X-Ray görüntüsü seçin:</p>
+
+                    <input type="file" accept="image/*" onChange={handleFileChange} id="fileInput" />
+                    <label htmlFor="fileInput" className="file-label">
+                        {file ? (
+                            <span>Görsel Seçildi</span>
+                        ) : (
+                            <span>📁 Dosya Seç veya Sürükle</span>
+                        )}
+                    </label>
+                    {file && <div className="file-name">{file.name}</div>}
+
+                    <div style={{ flex: 1 }}></div> {/* Spacer */}
+
+                    {error && <div className="error-msg">{error}</div>}
+
+                    <button
+                        onClick={handleAnalyze}
+                        disabled={!file || loading}
+                        className="analyze-btn"
+                    >
+                        {loading ? "AI İnceliyor..." : "Analiz Et"}
+                    </button>
+                </div>
+            </div>
+
+            {/* Sağ Panel: Görüntü ve Sonuç */}
+            <div className="main-content">
+                {!preview ? (
+                    <div className="empty-state">
+
+                        <h3>Görüntü Bekleniyor</h3>
+                        <p>Analiz sonuçları burada görüntülenecektir.</p>
                     </div>
-                )}
+                ) : (
+                    <div className="result-card">
+                        <div className="image-container">
+                            <img src={preview} alt="Analiz" className="preview-img" />
+                        </div>
 
-                <button onClick={handleAnalyze} disabled={!file || loading} className="analyze-btn">
-                    {loading ? "AI İnceliyor..." : "Analiz Et"}
-                </button>
-
-                {error && <div className="error-msg">{error}</div>}
-
-                {result && (
-                    <div className={`result-box ${result.className === 'Pneumonia' ? 'danger' : 'success'}`}>
-                        <h2>Sonuç: {result.className === 'Pneumonia' ? 'Zatürre Riski' : 'Normal'}</h2>
-                        <p>Güven Skoru: <strong>%{ (result.confidence * 100).toFixed(2) }</strong></p>
-                        <small>{result.message}</small>
+                        {result && (
+                            <div className="result-details">
+                                <span className={`result-badge ${result.className === 'Pneumonia' || result.className.toLowerCase().includes('hata')
+                                    ? 'badge-danger'
+                                    : 'badge-success'
+                                    }`}>
+                                    {result.className}
+                                </span>
+                                <p className="confidence-text">
+                                    Güven Skoru: <strong>%{(result.confidence * 100).toFixed(2)}</strong>
+                                </p>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
