@@ -76,7 +76,7 @@ function App() {
                         disabled={!file || loading}
                         className="analyze-btn"
                     >
-                        {loading ? "AI İnceliyor..." : "Analiz Et"}
+                        {loading ? "Analiz ediliyor" : "Analiz Et"}
                     </button>
                 </div>
             </div>
@@ -106,12 +106,17 @@ function App() {
                                 <p className="confidence-text">
                                     Güven Skoru: <strong>%{(result.confidence * 100).toFixed(2)}</strong>
                                 </p>
+                                {result.source_model && (
+                                    <p className="model-info">
+                                        Kullanılan Model: <span className="model-name">{result.source_model}</span>
+                                    </p>
+                                )}
                             </div>
                         )}
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     );
 }
 

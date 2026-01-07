@@ -78,6 +78,16 @@ CLASS_NAMES = {
     4: 'Tuberculosis'
 }
 
+print(f"\n{'!'*60}")
+print(f"UYARI: SINIF HARİTASI (CLASS MAPPING) KONTROLÜ")
+print(f"{'!'*60}")
+print(f"Model şu an şu sıralamayı varsayıyor:")
+for k, v in CLASS_NAMES.items():
+    print(f"  {k} -> {v}")
+print(f"\nEğer sizin eğitim veri setinizdeki klasörlerin (Folder) alfabetik sıralaması")
+print(f"bundan farklıysa, tahminler HEP YANLIŞ çıkacaktır!")
+print(f"{'!'*60}\n")
+
 # --- 4. MODEL MİMARİSİ VE YARDIMCI FONKSİYONLAR ---
 def create_mlp_head(input_dim, num_classes):
     """
@@ -120,7 +130,8 @@ def get_model(arch_type, num_classes):
         except:
             model = models.vit_b_16(pretrained=True)
         in_features = model.heads.head.in_features
-        model.heads.head = create_mlp_head(in_features, num_classes)
+        # HATA DUZELTME: Egitimde model.heads direkt degistirilmis (heads.0.weight vs heads.head.0.weight)
+        model.heads = create_mlp_head(in_features, num_classes)
 
     # 3. RESNET (ResNet50)
     elif arch_type == 'resnet50':
@@ -174,45 +185,70 @@ def get_model(arch_type, num_classes):
 # --- 5. MODELİ YÜKLE ---
 print(f"\n>> SEÇİLEN MODEL: {ACTIVE_MODEL_KEY} ({ARCH_TYPE})")
 print(f">> Dosya Yolu: {MODEL_PATH}")
+
 if os.path.exists(MODEL_PATH):
     size_mb = os.path.getsize(MODEL_PATH) / (1024 * 1024)
     print(f">> Dosya Boyutu: {size_mb:.2f} MB")
 else:
-    print(">> UYARI: Dosya diskte bulunamadı!")
+    print(f">> UYARI: '{MODEL_PATH}' diskte bulunamadı!")
+    print(f">> Mevcut Dosyalar: {os.listdir('.')}")   
+
 print(">> Yükleme başlıyor...")
 
 try:
     model = get_model(ARCH_TYPE, NUM_CLASSES)
-    # map_location: GPU/CPU uyumluluğu için
+    
+    # State dict yükle
     state_dict = torch.load(MODEL_PATH, map_location=device)
     
-    # InceptionV3 icin state_dict'teki aux_logits keyleri sorun cikarabilir, strict=False ile yukleyelim
-    if ARCH_TYPE == 'inception_v3':
-        model.load_state_dict(state_dict, strict=False)
-    else:
-        model.load_state_dict(state_dict)
-        
+    # GÜÇLENDİRİLMİŞ PREFIX TEMİZLİĞİ:
+    # Hem 'module.', hem '1.' hem de iç içe geçmiş 'module.1.' gibi yapıları temizler.
+    new_state_dict = {}
+    for k, v in state_dict.items():
+        name = k
+        # Basında 'module.' veya '1.' olduğu sürece döngüyle kırp
+        while name.startswith('module.') or name.startswith('1.'):
+            if name.startswith('module.'):
+                name = name[7:]
+            elif name.startswith('1.'):
+                name = name[2:]
+        new_state_dict[name] = v
+    state_dict = new_state_dict
+
+    # Strict=False ile yükle (Inception aux_logits gibi önemsiz eksikler için)
+    model.load_state_dict(state_dict, strict=False)
+    
     model.eval()
-    print(f">> ✅ BAŞARILI: {MODEL_PATH} yüklendi ve kullanıma hazır!")
-except FileNotFoundError:
-    print(f"\n!! KRİTİK HATA: Model dosyası '{MODEL_PATH}' bulunamadı!")
-    print("!! Lütfen Colab sol menüsünden dosyayı yüklediğinizden emin olun.")
+    print(f">> ✅ {MODEL_PATH} başarıyla yüklendi.")
+    
 except Exception as e:
     print(f"\n!! HATA: Model yüklenirken bir sorun oluştu.")
-    print(f"!! Hata Detayı: {e}")
+    print(f"!! Detay: {e}")
 
 # --- 6. RESİM İŞLEME (Transform) ---
-# Inception V3 -> 299x299, Diğerleri -> 224x224
-input_size = 224
-if ARCH_TYPE == 'inception_v3':
-    input_size = 299
-    print(f">> Bilgi: {ARCH_TYPE} için giriş boyutu 299x299 olarak ayarlandı.")
+# EĞİTİM İLE EŞLEŞME DÜZELTMESİ:
+# Eğitim sırasında muhtemelen resimler önce 224'e küçültülüp, sonra Inception için 299'a çıkarıldı.
+# Bu işlem resimde bir miktar "bulanıklık" yaratır. Model bunu öğrendiği için,
+# tahmin sırasında da aynı işlemi taklit etmeliyiz.
 
-val_transform = transforms.Compose([
-    transforms.Resize((input_size, input_size)),
-    transforms.ToTensor(),
-    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-])
+final_size = 224
+if ARCH_TYPE == 'inception_v3':
+    final_size = 299 # Inception'ın orijinal girişi
+    print(f">> Bilgi: InceptionV3 için özel transform uygulanıyor (224 -> 299 Upsample Simülasyonu)")
+    
+    val_transform = transforms.Compose([
+        transforms.Resize((224, 224)), # Önce eğitildiği boyuta indir
+        transforms.Resize((299, 299)), # Sonra modelin giriş boyutuna çıkar (Upsample effect)
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ])
+else:
+    # Diğerleri zaten 224 ile çalışıyor
+    val_transform = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+    ])
 
 # --- 7. SUNUCU (API) ---
 app = FastAPI()
@@ -220,15 +256,14 @@ app = FastAPI()
 @app.post("/predict")
 async def predict_image(file: UploadFile = File(...)):
     try:
-        # Resmi oku ve dönüştür
+        # Resmi oku
         image_data = await file.read()
         image = Image.open(io.BytesIO(image_data)).convert("RGB")
         tensor = val_transform(image).unsqueeze(0).to(device)
 
-        # Tahmin yap
+        # Tahmin
         with torch.no_grad():
             outputs = model(tensor)
-            # Inception training modda tuple dondurebilir, ama model.eval() dedik, tensor donmeli.
             probs = F.softmax(outputs, dim=1)
             confidence, predicted = torch.max(probs, 1)
 
@@ -240,9 +275,10 @@ async def predict_image(file: UploadFile = File(...)):
             "className": class_name,
             "confidence": round(score, 4),
             "source_model": ACTIVE_MODEL_KEY,
-            "message": f"Tespit Edilen: {class_name}"
+            "message": f"Tespit: {class_name}"
         }
     except Exception as e:
+        print(f"HATA: {e}")
         return {"className": "Hata", "confidence": 0.0, "message": str(e)}
 
 # --- 8. BAŞLAT ---

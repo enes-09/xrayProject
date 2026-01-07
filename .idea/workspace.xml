@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6768aa0d-8e7a-4dd4-ab64-ff7a868df369" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_script_colab.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_script_colab.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +94,8 @@
       <workItem from="1767602962878" duration="15000" />
       <workItem from="1767626246359" duration="5752000" />
       <workItem from="1767676424880" duration="360000" />
-      <workItem from="1767727652280" duration="749000" />
+      <workItem from="1767727652280" duration="18274000" />
+      <workItem from="1767786135317" duration="1970000" />
     </task>
     <servers />
   </component>
