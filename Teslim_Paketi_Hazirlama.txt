@@ -1,0 +1,37 @@
+X-RAY PROJESİ TESLİM PAKETİ HAZIRLAMA REHBERİ
+
+Hocaya teslim edeceğiniz Google Drive klasörünü hazırlamak için aşağıdaki adımları sırasıyla uygulayın.
+
+1. ANA KLASÖR OLUŞTURMA
+   - Masaüstünde "XRay_Projesi_Ad_Soyad" isminde yeni bir klasör oluşturun.
+
+2. BACKEND (JAVA) DOSYALARINI EKLEME
+   - Projenizdeki "Backend" klasörünü kopyalayıp oluşturduğunuz ana klasörün içine yapıştırın.
+   - Kopyaladığınız "Backend" klasörünün içine girin ve "target" isimli klasörü SİLİN. (Bu klasör çok yer kaplar ve gereksizdir).
+
+3. FRONTEND (REACT) DOSYALARINI EKLEME
+   - Projenizdeki "Frontend" klasörünü kopyalayıp oluşturduğunuz ana klasörün içine yapıştırın.
+   - Kopyaladığınız "Frontend" klasörünün içine girin ve "node_modules" klasörünü SİLİN. (Bu klasör çok büyüktür, gereksizdir).
+   - Varsa "dist" veya "build" klasörlerini de silebilirsiniz.
+
+4. AI (COLAB) KODUNU EKLEME
+   - Ana klasörün içinde "AI_Colab" isminde yeni bir klasör oluşturun.
+   - Proje dizinindeki "XRay_Colab_Notebook.ipynb" dosyasını bu klasörün içine kopyalayın.
+   - (İsteğe Bağlı): Eğer modelleri eğittiğiniz "Egitim.ipynb" gibi dosyalar varsa onları da buraya koyabilirsiniz.
+   - NOT: .pth uzantılı devasa model dosyalarını buraya KOYMAYIN.
+
+5. DÖKÜMANLARI EKLEME
+   - Proje dizinindeki "Açıklama.txt" ve "Run.txt" dosyalarını ana klasörün en dışına kopyalayın.
+
+6. SON KONTROL VE ZİPLEME
+   Klasör yapınız şöyle görünmelidir:
+   
+   XRay_Projesi_Ad_Soyad/
+   ├── Backend/ (target yok)
+   ├── Frontend/ (node_modules yok)
+   ├── AI_Colab/ (XRay_Colab_Notebook.ipynb var)
+   ├── Run.txt
+   └── Açıklama.txt
+
+   - Her şey tamamsa, ana klasöre sağ tıklayıp "Arşive Ekle" veya "Gönder > Sıkıştırılmış Klasör" diyerek .zip veya .rar dosyası haline getirin.
+   - Bu dosyayı Google Drive'a yükleyip hocayla paylaşabilirsiniz.

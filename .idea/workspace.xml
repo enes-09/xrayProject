@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6768aa0d-8e7a-4dd4-ab64-ff7a868df369" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/controller/IXRayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/controller/IXRayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/controller/impl/XRayControllerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/controller/impl/XRayControllerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/dto/DtoAnalysisResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/dto/DtoAnalysisResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/service/IAIService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/service/IAIService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/service/impl/AIServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/eneskulpu/service/impl/AIServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_script_colab.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_script_colab.py" afterDir="false" />
@@ -95,7 +100,15 @@
       <workItem from="1767626246359" duration="5752000" />
       <workItem from="1767676424880" duration="360000" />
       <workItem from="1767727652280" duration="18274000" />
-      <workItem from="1767786135317" duration="1970000" />
+      <workItem from="1767786135317" duration="3867000" />
+      <workItem from="1767875018398" duration="615000" />
+      <workItem from="1768761512987" duration="1968000" />
+      <workItem from="1768901195119" duration="4703000" />
+      <workItem from="1768915582269" duration="399000" />
+      <workItem from="1768938994420" duration="4331000" />
+      <workItem from="1768973699048" duration="305000" />
+      <workItem from="1768988856735" duration="608000" />
+      <workItem from="1768994650761" duration="11896000" />
     </task>
     <servers />
   </component>

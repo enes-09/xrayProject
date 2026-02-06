@@ -22,9 +22,11 @@ public class XRayControllerImpl implements IXRayController {
 
     @Override
     @PostMapping("/upload")
-    public ResponseEntity<DtoAnalysisResult> analyzeImage(@RequestParam("image") MultipartFile file) {
+    public ResponseEntity<DtoAnalysisResult> analyzeImage(
+            @RequestParam("image") MultipartFile file,
+            @RequestParam(value = "modelName", required = false, defaultValue = "swin_t") String modelName) {
         try {
-            DtoAnalysisResult result = aiService.analyzeXRay(file);
+            DtoAnalysisResult result = aiService.analyzeXRay(file, modelName);
             return ResponseEntity.ok(result);
         } catch (IOException e) {
             return ResponseEntity.internalServerError().build();

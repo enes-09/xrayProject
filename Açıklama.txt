@@ -1,0 +1,24 @@
+X-RAY GÖRÜNTÜ ANALİZ PROJESİ - GEREKLİ YAZILIMLAR VE ARAÇLAR
+
+Bu projenin kaynak kodlarını görüntülemek, düzenlemek ve çalıştırmak için aşağıdaki yazılımlara ihtiyaç duyulmaktadır:
+
+1. Visual Studio Code (VS Code)
+   - Açıklama: Frontend (React) kodlarını düzenlemek ve geliştirmek için önerilen kod editörüdür.
+
+2. Node.js ve npm
+   - Açıklama: Frontend (React) projesinin paket bağımlılıklarını yönetmek ve uygulamayı yerel sunucuda çalıştırmak için gereklidir.
+
+3. IntelliJ IDEA (veya Eclipse)
+   - Açıklama: Backend (Spring Boot) projesini açmak, derlemek ve yönetmek için kullanılan Java IDE'sidir.
+
+4. Java Development Kit (JDK 17 veya üzeri)
+   - Açıklama: Backend tarafındaki Java Spring Boot uygulamasının çalışabilmesi için gereken temel Java geliştirme kitidir.
+
+5. Google Colab
+   - Açıklama: Derin öğrenme modellerinin (PyTorch) yüksek performanslı GPU üzerinde çalıştırılması için kullanılan bulut tabanlı Python geliştirme ortamıdır. (Tarayıcı üzerinden erişilir, kurulum gerektirmez).
+
+6. Ngrok
+   - Açıklama: Google Colab üzerinde çalışan AI servisini (localhost), yerel bilgisayarda çalışan Backend uygulamasına bağlamak (public URL oluşturmak) için kullanılır.
+
+7. Web Tarayıcısı (Google Chrome, Microsoft Edge vb.)
+   - Açıklama: Web uygulamasının arayüzünü görüntülemek ve Google Colab ortamına erişmek için kullanılır.

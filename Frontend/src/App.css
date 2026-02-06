@@ -27,16 +27,19 @@ body {
   background-color: #f8fafc;
   /* Slightly off-white */
   border-right: 1px solid #cbd5e1;
-  padding: 2rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   box-shadow: 4px 0 24px rgba(0, 0, 0, 0.05);
   z-index: 10;
   flex-shrink: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .brand-header {
-  margin-bottom: 3rem;
+  padding: 2rem 2rem 1rem 2rem;
+  flex-shrink: 0;
 }
 
 .brand-title {
@@ -52,13 +55,57 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+  padding: 0 2rem;
+  overflow-y: auto;
+  padding-bottom: 1rem;
 }
 
 .instructions {
   color: #64748b;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
+}
+
+/* Model Selector Styles */
+.model-selector {
+  margin-bottom: 1rem;
+}
+
+.model-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.model-dropdown {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1e293b;
+  background-color: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25em 1.25em;
+}
+
+.model-dropdown:hover {
+  border-color: #94a3b8;
+}
+
+.model-dropdown:focus {
+  outline: none;
+  border-color: #64748b;
+  box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.15);
 }
 
 /* Input Styles */
@@ -225,4 +272,248 @@ input[type="file"] {
   background-color: #e2e8f0;
   padding: 2px 8px;
   border-radius: 4px;
+}
+
+/* ========== Gallery Styles ========== */
+.gallery-section {
+  margin-top: 0.5rem;
+}
+
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.gallery-count {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.clear-all-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.clear-all-btn:hover {
+  background-color: #fee2e2;
+}
+
+.thumbnail-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  max-height: 180px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.thumbnail-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  background-color: #000;
+}
+
+.thumbnail-item:hover {
+  border-color: #94a3b8;
+  transform: scale(1.02);
+}
+
+.thumbnail-item.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.thumbnail-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail-item .remove-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(239, 68, 68, 0.9);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.thumbnail-item:hover .remove-btn {
+  opacity: 1;
+}
+
+.thumbnail-item .remove-btn:hover {
+  background-color: #dc2626;
+}
+
+.thumbnail-number {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* Selected File Name */
+.selected-file-name {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #0369a1;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Sidebar Footer - Sticky Button */
+.sidebar-footer {
+  padding: 1rem 2rem 2rem 2rem;
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+/* ========== Multi Results Styles ========== */
+.multi-results {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.multi-results-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Best Result Highlight */
+.best-result {
+  background-color: #f1f5f9;
+  border: 2px solid #94a3b8;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.best-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.best-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.best-model {
+  font-weight: 500;
+  color: #334155;
+}
+
+.best-confidence {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+/* Results Table */
+.results-table-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.results-table thead {
+  background-color: #f1f5f9;
+  position: sticky;
+  top: 0;
+}
+
+.results-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.results-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.results-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.results-table .best-row {
+  background-color: #e2e8f0;
+}
+
+.results-table .best-row:hover {
+  background-color: #cbd5e1;
+}
+
+.table-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.confidence-cell {
+  font-weight: 600;
+  color: #334155;
 }

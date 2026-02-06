@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DtoAnalysisResult {
-    private String className;   // Örn: Pneumonia
-    private double confidence;  // Örn: 0.98
-    private String message;     // Hata mesajı veya ek bilgi
+    private String className; // Örn: Pneumonia
+    private double confidence; // Örn: 0.98
+    private String message; // Hata mesajı veya ek bilgi
+    private String source_model; // Kullanılan model (örn: swin_t, resnet50)
 }

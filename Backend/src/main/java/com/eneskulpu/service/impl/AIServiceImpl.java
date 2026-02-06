@@ -30,7 +30,7 @@ public class AIServiceImpl implements IAIService {
     }
 
     @Override
-    public DtoAnalysisResult analyzeXRay(MultipartFile file) throws IOException {
+    public DtoAnalysisResult analyzeXRay(MultipartFile file, String modelName) throws IOException {
         // Header ayarı (Multipart Form Data)
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -47,6 +47,11 @@ public class AIServiceImpl implements IAIService {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", fileResource);
 
+        // Model adını ekle (eğer belirtilmişse)
+        if (modelName != null && !modelName.isEmpty()) {
+            body.add("model_name", modelName);
+        }
+
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
         try {
@@ -54,12 +59,11 @@ public class AIServiceImpl implements IAIService {
             ResponseEntity<DtoAnalysisResult> response = restTemplate.postForEntity(
                     aiApiUrl,
                     requestEntity,
-                    DtoAnalysisResult.class
-            );
+                    DtoAnalysisResult.class);
             return response.getBody();
         } catch (Exception e) {
             // Hata olursa boş dönmemek için hata mesajı oluştur
-            return new DtoAnalysisResult("HATA", 0.0, "AI Servisine ulaşılamadı: " + e.getMessage());
+            return new DtoAnalysisResult("HATA", 0.0, "AI Servisine ulaşılamadı: " + e.getMessage(), null);
         }
     }
 }
