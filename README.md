@@ -1,8 +1,8 @@
 X-RAY GÖRÜNTÜ ANALİZ PROJESİ - GEREKLİ YAZILIMLAR VE ARAÇLAR
 
 KATKI VERENLER
-- [Senin Adın](https://github.com/enes-09)
-- [Arkadaşının Adı](https://github.com/theberkayozer)
+- [Enes Kulpu](https://github.com/enes-09)
+- [Berkay Özer](https://github.com/theberkayozer)
 
 Bu projenin kaynak kodlarını görüntülemek, düzenlemek ve çalıştırmak için aşağıdaki yazılımlara ihtiyaç duyulmaktadır:
 
