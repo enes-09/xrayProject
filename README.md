@@ -81,3 +81,6 @@ ADIM 3: FRONTEND (REACT) PROJESİNİN DERLENMESİ VE ÇALIŞTIRILMASI
 - Model listesi ve analiz sonuçları için Backend ve Colab servisinin açık olması şarttır.
 - İşiniz bittiğinde terminalleri kapatarak servisleri durdurabilirsiniz.
    
+<img width="1911" height="853" alt="image" src="https://github.com/user-attachments/assets/620925ad-67bc-408c-a39a-84ba0b874010" />
+<img width="1915" height="858" alt="image" src="https://github.com/user-attachments/assets/3f4a854e-1ac2-43a0-9c8d-bdf29497870a" />
+
