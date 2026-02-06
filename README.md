@@ -1,5 +1,5 @@
 X-RAY GÖRÜNTÜ ANALİZ PROJESİ - GEREKLİ YAZILIMLAR VE ARAÇLAR
-------------------------------------------------------------
+
 Bu projenin kaynak kodlarını görüntülemek, düzenlemek ve çalıştırmak için aşağıdaki yazılımlara ihtiyaç duyulmaktadır:
 
 1. Visual Studio Code (VS Code)
@@ -25,12 +25,11 @@ Bu projenin kaynak kodlarını görüntülemek, düzenlemek ve çalıştırmak i
    
 
 X-RAY GÖRÜNTÜ ANALİZ PROJESİ - ÇALIŞTIRMA VE DERLEME ADIMLARI
--------------------------------------------------------------
+
 Projenin sorunsuz çalışması için aşağıdaki adımları sırasıyla takip ediniz. Sistem 3 ana parçadan oluşmaktadır: AI Servisi (Colab), Backend (Spring Boot) ve Frontend (React).
 
-=================================================================
 ADIM 1: AI SERVİSİNİN (GOOGLE COLAB) BAŞLATILMASI
-=================================================================
+
 1. Google Colab sayfasını açın (https://colab.research.google.com/).
 2. Proje klasöründeki "backend_script_colab.py" dosyasının içeriğini kopyalayıp yeni bir not defterine yapıştırın. (Sadece bu kod yeterlidir).
 3. Google Drive Bağlantısı:
@@ -47,9 +46,8 @@ ADIM 1: AI SERVİSİNİN (GOOGLE COLAB) BAŞLATILMASI
 6. Kodun çıktısında "LİNKİNİZ: https://xxxx.ngrok-free.app/predict" şeklinde bir URL göreceksiniz.
    -> BU URL'İ KOPYALAYIN.
 
-=================================================================
 ADIM 2: BACKEND (SPRING BOOT) PROJESİNİN DERLENMESİ VE ÇALIŞTIRILMASI
-=================================================================
+
 1. Proje klasörü altındaki "Backend" klasörüne gidin.
 2. `src/main/resources/application.properties` dosyasını açın.
 3. `ai.service.url` değerini, ADIM 1'de kopyaladığınız ngrok linki ile güncelleyin:
@@ -64,9 +62,8 @@ ADIM 2: BACKEND (SPRING BOOT) PROJESİNİN DERLENMESİ VE ÇALIŞTIRILMASI
    
 7. Konsolda "Started Application in ... seconds" yazısını gördüğünüzde backend hazırdır (Varsayılan Port: 8080).
 
-=================================================================
 ADIM 3: FRONTEND (REACT) PROJESİNİN DERLENMESİ VE ÇALIŞTIRILMASI
-=================================================================
+
 1. Yeni bir Terminal penceresi açın ve proje klasörü altındaki "Frontend" klasörüne gidin.
 2. Gerekli paketleri yüklemek için şu komutu çalıştırın (Sadece ilk kurulumda gereklidir):
    
@@ -78,9 +75,6 @@ ADIM 3: FRONTEND (REACT) PROJESİNİN DERLENMESİ VE ÇALIŞTIRILMASI
 
 4. Terminalde "Local: http://localhost:5173" gibi bir adres göreceksiniz.
 5. Tarayıcınızda bu adresi açarak uygulamayı kullanmaya başlayabilirsiniz.
-
-=================================================================
-NOTLAR
 =================================================================
 - Kod çalıştırıldığında .pth modelleri sizin belirttiğiniz Google Drive yolundan çekilecektir.
 - Tarayıcıda http://localhost:5173 adresine gidildiğinde arayüz gelmelidir.
